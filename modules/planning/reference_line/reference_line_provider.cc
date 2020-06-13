@@ -69,8 +69,8 @@ ReferenceLineProvider::ReferenceLineProvider(
     relative_map_ = relative_map;
   }
 
-  CHECK(cyber::common::GetProtoFromFile(FLAGS_smoother_config_filename,
-                                        &smoother_config_))
+  ACHECK(cyber::common::GetProtoFromFile(FLAGS_smoother_config_filename,
+                                         &smoother_config_))
       << "Failed to load smoother config file "
       << FLAGS_smoother_config_filename;
   if (smoother_config_.has_qp_spline()) {
@@ -80,8 +80,8 @@ ReferenceLineProvider::ReferenceLineProvider(
   } else if (smoother_config_.has_discrete_points()) {
     smoother_.reset(new DiscretePointsReferenceLineSmoother(smoother_config_));
   } else {
-    CHECK(false) << "unknown smoother config "
-                 << smoother_config_.DebugString();
+    ACHECK(false) << "unknown smoother config "
+                  << smoother_config_.DebugString();
   }
   is_initialized_ = true;
 }
